@@ -1,7 +1,7 @@
 
 
-public class WordWrapService {
-    WordWrapService() {
+public class Wrapper {
+    Wrapper() {
       // An useless constructor
     }
 

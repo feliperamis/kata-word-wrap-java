@@ -2,18 +2,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class WordWrapServiceTest {
-    private static WordWrapService wordWrapService;
+public class WrapperTest {
+    private static Wrapper wrapper;
 
     @BeforeAll
     public static void setup() {
-        wordWrapService = new WordWrapService();
+        wrapper = new Wrapper();
     }
 
 
     @Test
     public void returnHelloWorld() {
-        String helloMessage = wordWrapService.helloWorld();
+        String helloMessage = wrapper.helloWorld();
         Assertions.assertEquals(helloMessage, "Hello world - Word wrap");
     }
 }
