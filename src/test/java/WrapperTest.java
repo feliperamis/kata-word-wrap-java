@@ -2,55 +2,68 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class WrapperTest {
+class WrapperTest {
 
     private static Wrapper wrapper;
 
     @BeforeAll
-    public static void setup() {
+    static void setup() {
         wrapper = new Wrapper();
     }
 
 
     @Test
-    public void returnHelloWorld() {
+    void returnHelloWorld() {
         String helloMessage = wrapper.helloWorld();
         Assertions.assertEquals(helloMessage, "Hello world - Word wrap");
     }
 
     @Test
-    public void returnWrapTextInTenCharacters() {
+    void returnWrapTextInTenCharacters() {
         String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-        String result = wrapper.getWrapText(text, 10);
-
         String expected = "Lorem ipsu\n" +
                 "m dolor si\n" +
-                "t amet, c\n" +
-                "onsectetur\n" +
+                "t amet, co\n" +
+                "nsectetur \n" +
                 "adipiscing\n" +
-                "elit, sed d\n" +
-                "o eiusmod\n" +
-                "tempor inc\n" +
-                "ididunt ut\n" +
-                "labore et \n" +
-                "dolore mag \n" +
-                "na aliqua.";
+                " elit, sed\n" +
+                " do eiusmo\n" +
+                "d tempor i\n" +
+                "ncididunt \n" +
+                "ut labore \n" +
+                "et dolore \n" +
+                "magna aliq\n" +
+                "ua.";
+
+        String result = wrapper.getWrapText(text, 10);
+
         Assertions.assertEquals(expected, result);
     }
 
     @Test
-    public void returnWrapTextInSevenCharacters() {
+    void returnWrapTextInSevenCharacters() {
         String text = "Lorem ipsum dolor sit";
-        String result = wrapper.getWrapText(text, 7);
-
         String expected = "Lorem i\n" +
                 "psum do\n" +
                 "lor sit";
+
+        String result = wrapper.getWrapText(text, 7);
+
         Assertions.assertEquals(expected, result);
     }
 
     @Test
-    public void returnExceptionWhenWrapHasNegativeNumber() {
+    void returnWrapTextInSevenCharactersWithSmallText() {
+        String text = "Lorem";
+        String expected = "Lorem";
+
+        String result = wrapper.getWrapText(text, 7);
+
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void returnExceptionWhenWrapHasNegativeNumber() {
         String text = "Lorem ipsum dolor sit";
 
         Exception result = Assertions.assertThrows(
@@ -59,5 +72,26 @@ public class WrapperTest {
         );
 
         Assertions.assertEquals("Invalid wrap number", result.getMessage());
+    }
+
+    @Test
+    void returnWrapTextInTenCharactersAndWord() {
+        String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        String expected = "Lorem ipsum\n" +
+                "dolor sit\n" +
+                "amet, consectetur\n" +
+                "adipiscing\n" +
+                "adipiscing\n" +
+                "elit, sed do\n" +
+                "eiusmod tempor\n" +
+                "incididunt\n" +
+                "ut labore et\n" +
+                "dolore magna\n" +
+                "et dolore \n" +
+                "aliqua";
+
+        String result = wrapper.getWrapTextByWord(text, 10);
+
+        Assertions.assertEquals(expected, result);
     }
 }

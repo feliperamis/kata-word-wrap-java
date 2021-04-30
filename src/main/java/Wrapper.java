@@ -1,8 +1,7 @@
-
-
 public class Wrapper {
+
     Wrapper() {
-      // An useless constructor
+        // An useless constructor
     }
 
     public String helloWorld() {
@@ -10,23 +9,40 @@ public class Wrapper {
     }
 
     public String getWrapText(String text, int wrap) {
-
         if (wrap < 0) {
             throw new RuntimeException("Invalid wrap number");
         }
-
-        return "Lorem ipsu\n" +
-                "m dolor si\n" +
-                "t amet, c\n" +
-                "onsectetur\n" +
-                "adipiscing\n" +
-                "elit, sed d\n" +
-                "o eiusmod\n" +
-                "tempor inc\n" +
-                "ididunt ut\n" +
-                "labore et \n" +
-                "dolore mag \n" +
-                "na aliqua.";
+        return wrapTextByParameter(text, wrap);
     }
 
+    private String wrapTextByParameter(String text, int delimiter) {
+        var builder = new StringBuilder();
+        int maxLinesToBreak = (text.length() / delimiter) + (text.length() % delimiter);
+        while (maxLinesToBreak > 0) {
+            if (text.length() < delimiter) {
+                builder.append(text);
+                break;
+            }
+            var value = text.substring(0, delimiter);
+            builder.append(value);
+            text = text.substring(delimiter);
+            if (text.length() > 0) {
+                builder.append("\n");
+            }
+            maxLinesToBreak--;
+        }
+        return builder.toString();
+    }
+
+    public String getWrapTextByWord(String text, int delimiter) {
+        if (delimiter < 0) {
+            throw new RuntimeException("Invalid wrap number");
+        }
+        return wrapTextWithWordByParameter(text, delimiter);
+    }
+
+    public String wrapTextWithWordByParameter(String text, int delimiter) {
+
+        return "";
+    }
 }
