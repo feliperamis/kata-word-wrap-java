@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WrapperTest {
+
     private static Wrapper wrapper;
 
     @BeforeAll
@@ -35,5 +36,28 @@ public class WrapperTest {
                 "dolore mag \n" +
                 "na aliqua.";
         Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    public void returnWrapTextInSevenCharacters() {
+        String text = "Lorem ipsum dolor sit";
+        String result = wrapper.getWrapText(text, 7);
+
+        String expected = "Lorem i\n" +
+                "psum do\n" +
+                "lor sit";
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    public void returnExceptionWhenWrapHasNegativeNumber() {
+        String text = "Lorem ipsum dolor sit";
+
+        Exception result = Assertions.assertThrows(
+                Exception.class,
+                () -> wrapper.getWrapText(text, -2)
+        );
+
+        Assertions.assertEquals("Invalid wrap number", result.getMessage());
     }
 }
