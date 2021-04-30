@@ -16,5 +16,4 @@ public class WordWrapServiceTest {
         String helloMessage = wordWrapService.helloWorld();
         Assertions.assertEquals(helloMessage, "Hello world - Word wrap");
     }
-
 }
