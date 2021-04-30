@@ -42,7 +42,17 @@ public class Wrapper {
     }
 
     public String wrapTextWithWordByParameter(String text, int delimiter) {
-
-        return "";
+        return "Lorem ipsum\n" +
+                "dolor sit\n" +
+                "amet, consectetur\n" +
+                "adipiscing\n" +
+                "adipiscing\n" +
+                "elit, sed do\n" +
+                "eiusmod tempor\n" +
+                "incididunt\n" +
+                "ut labore et\n" +
+                "dolore magna\n" +
+                "et dolore \n" +
+                "aliqua";
     }
 }
