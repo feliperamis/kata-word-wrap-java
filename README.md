@@ -35,7 +35,7 @@ mvn clean install
 
 ### Run tests
 
-Run the WordWrapServiceTest class and that will run all the tests inside. You can also run
+Run the WrapperTest class and that will run all the tests inside. You can also run
 
 ```shell
 mvn test

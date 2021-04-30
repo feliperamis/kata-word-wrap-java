@@ -25,4 +25,5 @@ hs_err_pid*
 # IntelliJ
 .idea/
 target/
-.iml
+.iml/
+/kata-word-wrap-java.iml

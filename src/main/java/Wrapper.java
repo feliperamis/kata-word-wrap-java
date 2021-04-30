@@ -1,7 +1,7 @@
 
 
-public class WordWrapService {
-    WordWrapService() {
+public class Wrapper {
+    Wrapper() {
       // An useless constructor
     }
 
@@ -9,7 +9,7 @@ public class WordWrapService {
         return "Hello world - Word wrap";
     }
 
-    public String getWrapText(String text) {
+    public String getWrapText(String text, int wrap) {
         return "text";
     }
 
