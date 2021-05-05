@@ -95,7 +95,7 @@ class WrapperTest {
     @Test
     void returnWrapTextInTenCharactersWithHardLimit() {
         String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-        String expected = "Lorem ipsum\n" +
+        String expected = "Lorem \n" +
                 "ipsum \n" +
                 "dolor sit \n" +
                 "amet, \n" +
@@ -108,10 +108,10 @@ class WrapperTest {
                 "ut labore \n" +
                 "et dolore \n" +
                 "magna \n" +
-                "aliqua.\n";
+                "aliqua. \n";
 
         String result = wrapper.getWrapTextHardLimit(text, 10);
-
+        System.out.println("Result:\n" + result);
         Assertions.assertEquals(expected, result);
     }
 }

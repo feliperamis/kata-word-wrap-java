@@ -48,7 +48,9 @@ public class Wrapper {
 
         var aux = new StringBuilder();
         listWords.forEach(word -> softLimitWords(word, aux, delimiter, builder));
-
+        if (aux.length() > 0) {
+            builder.append(aux).append("\n");
+        }
         return builder.toString();
     }
 
@@ -65,23 +67,38 @@ public class Wrapper {
 
     public String getWrapTextHardLimit(String text, int delimiter) {
         validateDelimiter(delimiter);
-        return "Lorem ipsum\n" +
-                "ipsum \n" +
-                "dolor sit \n" +
-                "amet, \n" +
-                "consectetur\n" +
-                "adipiscing\n" +
-                "elit, sed \n" +
-                "do eiusmod\n" +
-                "tempor \n" +
-                "incididunt\n" +
-                "ut labore \n" +
-                "et dolore \n" +
-                "magna \n" +
-                "aliqua.\n";
+        return wrapTextWithWordHardLimit(text, delimiter);
     }
 
-    private void validateDelimiter(int delimiter ) {
+    private String wrapTextWithWordHardLimit(String text, int delimiter) {
+        List<String> listWords = Arrays.asList(text.split(BLANK));
+        var builder = new StringBuilder();
+
+        var aux = new StringBuilder();
+        listWords.forEach(word -> hardLimitWords(word, aux, delimiter, builder));
+        if (aux.length() > 0) {
+            builder.append(aux).append("\n");
+        }
+        return builder.toString();
+    }
+
+    private void hardLimitWords(String word, StringBuilder aux, int delimiter, StringBuilder builder) {
+        int sumWords = aux.length() + word.length();
+        if (sumWords > delimiter) {
+            builder.append(aux).append("\n");
+            aux.delete(0, aux.length());
+        }
+        aux.append(word);
+        if(aux.length() < delimiter) {
+            aux.append(BLANK);
+        }
+        if (aux.length() >= delimiter) {
+            builder.append(aux).append("\n");
+            aux.delete(0, aux.length());
+        }
+    }
+
+    private void validateDelimiter(int delimiter) {
         if (delimiter < 0) {
             throw new RuntimeException("Invalid wrap number");
         }
