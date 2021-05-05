@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Wrapper {
 
     Wrapper() {
@@ -42,17 +45,23 @@ public class Wrapper {
     }
 
     public String wrapTextWithWordByParameter(String text, int delimiter) {
-        return "Lorem ipsum\n" +
-                "dolor sit\n" +
-                "amet, consectetur\n" +
-                "adipiscing\n" +
-                "adipiscing\n" +
-                "elit, sed do\n" +
-                "eiusmod tempor\n" +
-                "incididunt\n" +
-                "ut labore et\n" +
-                "dolore magna\n" +
-                "et dolore \n" +
-                "aliqua";
+        List<String> listWords = Arrays.asList(text.split(" "));
+        var builder = new StringBuilder();
+
+        var aux = new StringBuilder();
+        listWords.forEach(word -> softLimitWords(word, aux, delimiter, builder));
+
+        return builder.toString();
+    }
+
+    private void softLimitWords(String word, StringBuilder aux, int delimiter, StringBuilder builder) {
+        aux.append(word);
+        if (aux.length() < delimiter) {
+            aux.append(" ");
+        }
+        if (aux.length() >= delimiter) {
+            builder.append(aux).append("\n");
+            aux.delete(0, aux.length());
+        }
     }
 }

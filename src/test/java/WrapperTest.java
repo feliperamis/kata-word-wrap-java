@@ -11,7 +11,6 @@ class WrapperTest {
         wrapper = new Wrapper();
     }
 
-
     @Test
     void returnHelloWorld() {
         String helloMessage = wrapper.helloWorld();
@@ -75,23 +74,21 @@ class WrapperTest {
     }
 
     @Test
-    void returnWrapTextInTenCharactersAndWord() {
+    void returnWrapTextInTenCharactersWithSoftLimit() {
         String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
         String expected = "Lorem ipsum\n" +
-                "dolor sit\n" +
+                "dolor sit \n" +
                 "amet, consectetur\n" +
                 "adipiscing\n" +
-                "adipiscing\n" +
-                "elit, sed do\n" +
-                "eiusmod tempor\n" +
-                "incididunt\n" +
-                "ut labore et\n" +
-                "dolore magna\n" +
+                "elit, sed \n" +
+                "do eiusmod\n" +
+                "tempor incididunt\n" +
+                "ut labore \n" +
                 "et dolore \n" +
-                "aliqua";
+                "magna aliqua.\n";
 
         String result = wrapper.getWrapTextByWord(text, 10);
-
+        System.out.println("Result ->\n" + result);
         Assertions.assertEquals(expected, result);
     }
 }
