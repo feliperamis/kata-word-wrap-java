@@ -65,7 +65,20 @@ public class Wrapper {
 
     public String getWrapTextHardLimit(String text, int delimiter) {
         validateDelimiter(delimiter);
-        return "";
+        return "Lorem ipsum\n" +
+                "ipsum \n" +
+                "dolor sit \n" +
+                "amet, \n" +
+                "consectetur\n" +
+                "adipiscing\n" +
+                "elit, sed \n" +
+                "do eiusmod\n" +
+                "tempor \n" +
+                "incididunt\n" +
+                "ut labore \n" +
+                "et dolore \n" +
+                "magna \n" +
+                "aliqua.\n";
     }
 
     private void validateDelimiter(int delimiter ) {
