@@ -3,6 +3,8 @@ import java.util.List;
 
 public class Wrapper {
 
+    private static final String BLANK = " ";
+
     Wrapper() {
         // An useless constructor
     }
@@ -12,9 +14,7 @@ public class Wrapper {
     }
 
     public String getWrapText(String text, int wrap) {
-        if (wrap < 0) {
-            throw new RuntimeException("Invalid wrap number");
-        }
+        validateDelimiter(wrap);
         return wrapTextByParameter(text, wrap);
     }
 
@@ -37,15 +37,13 @@ public class Wrapper {
         return builder.toString();
     }
 
-    public String getWrapTextByWord(String text, int delimiter) {
-        if (delimiter < 0) {
-            throw new RuntimeException("Invalid wrap number");
-        }
-        return wrapTextWithWordByParameter(text, delimiter);
+    public String getWrapTextSoftLimit(String text, int delimiter) {
+        validateDelimiter(delimiter);
+        return wrapTextWithWordSoftLimit(text, delimiter);
     }
 
-    public String wrapTextWithWordByParameter(String text, int delimiter) {
-        List<String> listWords = Arrays.asList(text.split(" "));
+    private String wrapTextWithWordSoftLimit(String text, int delimiter) {
+        List<String> listWords = Arrays.asList(text.split(BLANK));
         var builder = new StringBuilder();
 
         var aux = new StringBuilder();
@@ -57,11 +55,22 @@ public class Wrapper {
     private void softLimitWords(String word, StringBuilder aux, int delimiter, StringBuilder builder) {
         aux.append(word);
         if (aux.length() < delimiter) {
-            aux.append(" ");
+            aux.append(BLANK);
         }
         if (aux.length() >= delimiter) {
             builder.append(aux).append("\n");
             aux.delete(0, aux.length());
+        }
+    }
+
+    public String getWrapTextHardLimit(String text, int delimiter) {
+        validateDelimiter(delimiter);
+        return "";
+    }
+
+    private void validateDelimiter(int delimiter ) {
+        if (delimiter < 0) {
+            throw new RuntimeException("Invalid wrap number");
         }
     }
 }

@@ -87,8 +87,31 @@ class WrapperTest {
                 "et dolore \n" +
                 "magna aliqua.\n";
 
-        String result = wrapper.getWrapTextByWord(text, 10);
-        System.out.println("Result ->\n" + result);
+        String result = wrapper.getWrapTextSoftLimit(text, 10);
+
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void returnWrapTextInTenCharactersWithHardLimit() {
+        String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        String expected = "Lorem ipsum\n" +
+                "ipsum \n" +
+                "dolor sit \n" +
+                "amet, \n" +
+                "consectetur\n" +
+                "adipiscing\n" +
+                "elit, sed \n" +
+                "do eiusmod\n" +
+                "tempor \n" +
+                "incididunt\n" +
+                "ut labore \n" +
+                "et dolore \n" +
+                "magna \n" +
+                "aliqua.\n";
+
+        String result = wrapper.getWrapTextHardLimit(text, 10);
+
         Assertions.assertEquals(expected, result);
     }
 }
